@@ -23,13 +23,18 @@ const Home = ({ searchParams }: SearchParamProps) => {
 
           <PatientForm />
 
-          <div className="text-14-regular mt-20 flex justify-between">
+          <div className="text-14-regular mt-20 flex justify-between items-center">
             <p className="justify-items-end text-dark-600 xl:text-left">
               © 2024 CarePluse
             </p>
-            <Link href="/?admin=true" className="text-green-500">
-              Admin
-            </Link>
+            <div className="flex gap-4">
+              <Link href="/doctors/register" className="text-blue-500">
+                Doctor
+              </Link>
+              <Link href="/?admin=true" className="text-green-500">
+                Admin
+              </Link>
+            </div>
           </div>
         </div>
       </section>
