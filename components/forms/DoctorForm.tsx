@@ -50,9 +50,8 @@ export const DoctorForm = () => {
   const onSubmit = async (values: z.infer<typeof DoctorFormValidation>) => {
     setIsLoading(true);
     try {
-      // TODO: Implement doctor registration logic
-      console.log(values);
-      router.push("/");
+      await registerDoctor(values);
+      router.push("/doctor-pending");
     } catch (error) {
       console.log(error);
     }
