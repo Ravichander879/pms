@@ -18,24 +18,11 @@ export const createAppointment = async (
   appointment: CreateAppointmentParams
 ) => {
   try {
-    const appointmentId = ID.unique();
-    let videoRoomUrl = null;
-    
-    if (appointment.isOnline) {
-      videoRoomUrl = `https://carepulse.daily.co/${appointmentId}`;
-    }
-
-    // Remove isOnline from the appointment data before sending to database
-    const { isOnline, ...appointmentData } = appointment;
-
     const newAppointment = await databases.createDocument(
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
-      appointmentId,
-      {
-        ...appointmentData,
-        videoRoomUrl
-      }
+      ID.unique(),
+      appointment
     );
 
     revalidatePath("/admin");
@@ -53,6 +40,26 @@ export const getRecentAppointmentList = async () => {
       APPOINTMENT_COLLECTION_ID!,
       [Query.orderDesc("$createdAt")]
     );
+
+    // const scheduledAppointments = (
+    //   appointments.documents as Appointment[]
+    // ).filter((appointment) => appointment.status === "scheduled");
+
+    // const pendingAppointments = (
+    //   appointments.documents as Appointment[]
+    // ).filter((appointment) => appointment.status === "pending");
+
+    // const cancelledAppointments = (
+    //   appointments.documents as Appointment[]
+    // ).filter((appointment) => appointment.status === "cancelled");
+
+    // const data = {
+    //   totalCount: appointments.total,
+    //   scheduledCount: scheduledAppointments.length,
+    //   pendingCount: pendingAppointments.length,
+    //   cancelledCount: cancelledAppointments.length,
+    //   documents: appointments.documents,
+    // };
 
     const initialCounts = {
       scheduledCount: 0,

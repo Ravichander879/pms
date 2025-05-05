@@ -21,7 +21,8 @@ export const registerDoctor = async (doctor: any) => {
         experience: doctor.experience,
         qualifications: doctor.qualifications,
         specialization: doctor.specialization,
-        
+      
+        createdAt: new Date().toISOString()
       }
     );
 

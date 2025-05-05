@@ -18,24 +18,14 @@ export const createAppointment = async (
   appointment: CreateAppointmentParams
 ) => {
   try {
-    const appointmentId = ID.unique();
-    let videoRoomUrl = null;
-    
-    if (appointment.isOnline) {
-      videoRoomUrl = `https://carepulse.daily.co/${appointmentId}`;
-    }
-
-    // Remove isOnline from the appointment data before sending to database
+    // Remove isOnline before sending to database
     const { isOnline, ...appointmentData } = appointment;
-
+    
     const newAppointment = await databases.createDocument(
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
-      appointmentId,
-      {
-        ...appointmentData,
-        videoRoomUrl
-      }
+      ID.unique(),
+      appointmentData
     );
 
     revalidatePath("/admin");
@@ -119,11 +109,14 @@ export const updateAppointment = async ({
 }: UpdateAppointmentParams) => {
   try {
     // Update appointment to scheduled -> https://appwrite.io/docs/references/cloud/server-nodejs/databases#updateDocument
+    // Remove isOnline before updating database
+    const { isOnline, ...appointmentData } = appointment;
+    
     const updatedAppointment = await databases.updateDocument(
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
       appointmentId,
-      appointment
+      appointmentData
     );
 
     if (!updatedAppointment) throw Error;

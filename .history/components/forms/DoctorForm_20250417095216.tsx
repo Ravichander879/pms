@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,7 +10,6 @@ import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
-import { registerDoctor } from "@/lib/actions/doctor.actions";
 
 const DoctorFormValidation = z.object({
   name: z
@@ -50,26 +50,10 @@ export const DoctorForm = () => {
   const onSubmit = async (values: z.infer<typeof DoctorFormValidation>) => {
     setIsLoading(true);
     try {
-      const doctor = {
-        name: values.name,
-        email: values.email,
-        phone: values.phone,
-        specialization: values.specialization,
-        qualifications: values.qualifications,
-        experience: values.experience,
-        status: "pending",
-        createdAt: new Date().toISOString()
-      };
-
-      const newDoctor = await registerDoctor(doctor);
-
-      if (newDoctor) {
-        router.push("/doctors/register/success");
-      } else {
-        throw new Error("Failed to register doctor");
-      }
+      await registerDoctor(values);
+      router.push("/doctor-pending");
     } catch (error) {
-      console.error("Error registering doctor:", error);
+      console.log(error);
     }
     setIsLoading(false);
   };
@@ -87,7 +71,7 @@ export const DoctorForm = () => {
           control={form.control}
           name="name"
           label="Full Name"
-          placeholder="Dr. Sunitha"
+          placeholder="Dr. John Doe"
         />
 
         <CustomFormField
@@ -103,7 +87,7 @@ export const DoctorForm = () => {
           control={form.control}
           name="phone"
           label="Phone Number"
-          placeholder="+91 9876543210"
+          placeholder="(555) 123-4567"
         />
 
         <CustomFormField

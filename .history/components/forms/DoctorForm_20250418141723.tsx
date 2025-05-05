@@ -87,7 +87,7 @@ export const DoctorForm = () => {
           control={form.control}
           name="name"
           label="Full Name"
-          placeholder="Dr. Sunitha"
+          placeholder="Dr. John Doe"
         />
 
         <CustomFormField
@@ -103,7 +103,7 @@ export const DoctorForm = () => {
           control={form.control}
           name="phone"
           label="Phone Number"
-          placeholder="+91 9876543210"
+          placeholder="(555) 123-4567"
         />
 
         <CustomFormField

@@ -24,7 +24,7 @@ const DoctorRegister = () => {
       </section>
 
       <Image
-        src="/assets/images/register-img.png"
+        src="/assets/images/dr-green.png"
         height={1000}
         width={1000}
         alt="doctor"

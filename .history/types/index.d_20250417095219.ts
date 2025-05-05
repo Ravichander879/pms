@@ -46,8 +46,6 @@ declare type CreateAppointmentParams = {
   schedule: Date;
   status: Status;
   note: string | undefined;
-  isOnline?: boolean;
-  videoRoomUrl?: string | null;
 };
 
 declare type UpdateAppointmentParams = {

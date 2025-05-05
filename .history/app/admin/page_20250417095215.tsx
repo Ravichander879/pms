@@ -54,7 +54,41 @@ const AdminPage = async () => {
           />
         </section>
 
-        <DataTable columns={columns} data={appointments.documents} />
+        <section className="space-y-4 mt-8">
+        <h2 className="text-2xl font-bold">Doctor Applications</h2>
+        <div className="grid gap-4">
+          {doctors.map((doctor) => (
+            <div key={doctor.$id} className="flex items-center justify-between p-4 bg-white rounded-lg shadow">
+              <div>
+                <p className="font-semibold">{doctor.name}</p>
+                <p className="text-sm text-gray-600">{doctor.specialization}</p>
+                <p className="text-sm text-gray-600">{doctor.email}</p>
+              </div>
+              {!doctor.approved && (
+                <div className="flex gap-2">
+                  <button 
+                    onClick={() => handleApproval(doctor.$id, true)}
+                    className="px-4 py-2 bg-green-500 text-white rounded"
+                  >
+                    Approve
+                  </button>
+                  <button 
+                    onClick={() => handleApproval(doctor.$id, false)}
+                    className="px-4 py-2 bg-red-500 text-white rounded"
+                  >
+                    Reject
+                  </button>
+                </div>
+              )}
+              {doctor.approved && (
+                <span className="text-green-500">Approved</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <DataTable columns={columns} data={appointments.documents} />
       </main>
     </div>
   );

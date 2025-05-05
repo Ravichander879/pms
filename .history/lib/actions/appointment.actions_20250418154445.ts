@@ -22,18 +22,16 @@ export const createAppointment = async (
     let videoRoomUrl = null;
     
     if (appointment.isOnline) {
+      // Create a unique room URL for online appointments
       videoRoomUrl = `https://carepulse.daily.co/${appointmentId}`;
     }
-
-    // Remove isOnline from the appointment data before sending to database
-    const { isOnline, ...appointmentData } = appointment;
 
     const newAppointment = await databases.createDocument(
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
       appointmentId,
       {
-        ...appointmentData,
+        ...appointment,
         videoRoomUrl
       }
     );

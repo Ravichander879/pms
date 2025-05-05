@@ -41,22 +41,6 @@ const RequestSuccess = async ({
             Your <span className="text-green-500">appointment request</span> has
             been successfully submitted!
           </h2>
-          {appointment?.isOnline && appointment?.videoRoomUrl && (
-            <div className="mt-4 text-center">
-              <p className="mb-2">Your video consultation link:</p>
-              <a 
-                href={appointment.videoRoomUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:text-blue-700 underline"
-              >
-                {appointment.videoRoomUrl}
-              </a>
-              <p className="mt-2 text-sm text-gray-600">
-                Please save this link. You'll need it on the appointment date.
-              </p>
-            </div>
-          )}
           <p>We&apos;ll be in touch shortly to confirm.</p>
         </section>
 

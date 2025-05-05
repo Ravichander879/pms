@@ -50,7 +50,6 @@ export const AppointmentForm = ({
       reason: appointment ? appointment.reason : "",
       note: appointment?.note || "",
       cancellationReason: appointment?.cancellationReason || "",
-      isOnline: false, // Added default value for isOnline
     },
   });
 
@@ -81,7 +80,6 @@ export const AppointmentForm = ({
           reason: values.reason!,
           status: status as Status,
           note: values.note,
-          isOnline: values.isOnline, // Added isOnline to the appointment object
         };
 
         const newAppointment = await createAppointment(appointment);
@@ -101,10 +99,8 @@ export const AppointmentForm = ({
             schedule: new Date(values.schedule),
             status: status as Status,
             cancellationReason: values.cancellationReason,
-            isOnline: values.isOnline, // Added isOnline to the update
           },
           type,
-          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         };
 
         const updatedAppointment = await updateAppointment(appointmentToUpdate);
@@ -176,13 +172,6 @@ export const AppointmentForm = ({
               label="Expected appointment date"
               showTimeSelect
               dateFormat="MM/dd/yyyy  -  h:mm aa"
-            />
-
-            <CustomFormField
-              fieldType={FormFieldType.CHECKBOX}
-              control={form.control}
-              name="isOnline"
-              label="Online Consultation"
             />
 
             <div

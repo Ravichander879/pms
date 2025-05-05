@@ -43,27 +43,27 @@ export const IdentificationTypes = [
 export const Doctors = [
   {
     image: "/assets/images/dr-green.png",
-    name: "Manoj Gupta",
+    name: "John Green",
   },
   {
     image: "/assets/images/dr-cameron.png",
-    name: "Nandita Palshetkar",
+    name: "Leila Cameron",
   },
   {
     image: "/assets/images/dr-livingston.png",
-    name: "Devi Prasad Shetty",
+    name: "David Livingston",
   },
   {
     image: "/assets/images/dr-peter.png",
-    name: "Prathap C. Reddy",
+    name: "Evan Peter",
   },
   {
     image: "/assets/images/dr-powell.png",
-    name: "Jyothi Shenoy",
+    name: "Jane Powell",
   },
   {
     image: "/assets/images/dr-remirez.png",
-    name: "Ashok Seth",
+    name: "Alex Ramirez",
   },
   {
     image: "/assets/images/dr-lee.png",
@@ -97,11 +97,3 @@ export const StatusIcon = {
   approved: "/assets/icons/check.svg",
   rejected: "/assets/icons/cancelled.svg",
 };
-interface IAppointment {
-  schedule: Date;
-  primaryPhysician: string;
-  reason?: string;
-  note?: string;
-  cancellationReason?: string;
-  isOnline: boolean;
-}
